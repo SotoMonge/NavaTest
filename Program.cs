@@ -53,21 +53,19 @@ namespace AlphabetCodingTest
                 string sVal = Console.ReadLine();
                 StringBuilder sb = new StringBuilder();
                 int[] val = new int[sVal.Length];
-                int s = 0;
-                while (s < val.Length)
+                int i = 0;
+                while (i < val.Length)
                 {
-                    val[s] = int.Parse(sVal[s].ToString());
-                    s++;
+                    val[i] = int.Parse(sVal[i].ToString());
+                    sb.Append(_Diccionario[val[i]]);
+                    i++;
                 }
-
+                i = 0;
                 int p1 = 0;
                 int p2 = val.Length - 1;
 
                 List<string> lista = new List<string>();
-                for (int i = 0; i < val.Length; i++)
-                {
-                    sb.Append(_Diccionario[val[i]]);
-                }
+                i = 0;
                 lista.Add(sb.ToString());
                 sb.Clear();
 
@@ -75,7 +73,7 @@ namespace AlphabetCodingTest
                 if (int.Parse(val[p2 - 1].ToString() + val[p2].ToString()) < _Diccionario.Count)
                 {
                     Insert1 = int.Parse(val[p2 - 1].ToString() + val[p2].ToString());
-                    p2 = p2 - 1;
+                    p2--;
                 }
                 else
                 {
@@ -85,23 +83,24 @@ namespace AlphabetCodingTest
                 {
                     int Insert = int.Parse(val[p1].ToString() + val[p1 + 1].ToString()) < _Diccionario.Count ?
                         int.Parse(val[p1].ToString() + val[p1 + 1].ToString()) : Insert = val[p1];
-
-                    for (int i = 0; i < val.Length; i++)
+                    while(i< val.Length)
                     {
                         if (i == p1)
                         {
                             sb.Append(_Diccionario[Insert]);
-                            i = int.Parse(val[p1].ToString() + val[p1 + 1].ToString()) < _Diccionario.Count ? i + 1 : i;
+                            i = int.Parse(val[p1].ToString() + val[p1 + 1].ToString()) < _Diccionario.Count ? i + 2 : i + 1;
                             continue;
                         }
                         if (i == p2)
                         {
                             sb.Append(_Diccionario[Insert1]);
-                            i = int.Parse(val[p2 - 1].ToString() + val[p2].ToString()) < _Diccionario.Count ? i + 1 : i;
+                            i = int.Parse(val[p2 - 1].ToString() + val[p2].ToString()) < _Diccionario.Count ? i + 2 : i + 1;
                             continue;
                         }
                         sb.Append(_Diccionario[val[i]]);
+                        i++;
                     }
+                    i = 0;
                     if (!lista.Contains(sb.ToString()))
                     {
                         lista.Add(sb.ToString());
